@@ -9,7 +9,7 @@ PORT = process.env.PORT or 3010
 
 app = express()
 
-app.get '/ci/', (req, res, next) =>
+app.get '/', (req, res, next) =>
 	res.send 'lytedev/tiny-ci v' + pkg.version
 
 endpoints app

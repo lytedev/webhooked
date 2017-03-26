@@ -13,7 +13,7 @@ if [ -z "$LYTEDEV_HUGO_DIR" ]; then
 	exit 1
 fi
 
-pushd "$HOME/../code/lytedev/content/"
+pushd "$LYTEDEV_HUGO_DIR"
 git pull
 yarn
 pushd "themes/lytedev"

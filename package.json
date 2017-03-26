@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "coffee index.coffee",
-    "build": "coffee --output dist --compile ./*.coffee",
+    "build": "coffee --output dist --compile ./*.coffee && cp ./package.json dist",
     "daemonize": "npm run build && pm2 start dist/index.js --name 'tiny-ci'",
     "delete-daemon": "pm2 delete 'tiny-ci'",
     "test": "echo \"Error: no test specified\" && exit 1"

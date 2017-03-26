@@ -1,15 +1,16 @@
 {
-  "name": "server",
-  "version": "1.0.0",
+  "name": "tiny-ci",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "coffee index.coffee",
-    "daemonize": "pm2 start index.coffee --name 'tiny-ci' --interpreter coffee",
+    "build": "coffee --output dist --compile ./*.coffee",
+    "daemonize": "npm run build && pm2 start dist/index.js --name 'tiny-ci'",
     "delete-daemon": "pm2 delete 'tiny-ci'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "daniel@lytedev.io",
   "license": "ISC",
   "dependencies": {
     "coffee-script": "^1.12.4",

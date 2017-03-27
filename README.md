@@ -13,6 +13,7 @@ I don't really know what I'm talking about.
 * Other webhook endpoints (GitLab, Bitbucket, Slack?)
 * Flesh out the build system (so that scripts and even the `package.json` don't
 	need to be copied - yuck!)
+* Better method of calling scripts?
 
 ## Setup
 
@@ -31,3 +32,13 @@ Simply point a webhook at this server and have it trigger the script that
 properly pulls down the code or whatever.
 
 Also check secrets and whatnot... someday.
+
+## FAQ
+
+#### What is the `env_scripts` directory for?
+
+`env_scripts` is meant to contain environment-specific scripts. For example,
+currently we have a bash script that exports directories used by the main
+scripts. Realistically, this would be... all scripts, but it's nice to have some
+examples in the `scripts` directory and in the future, there may be some shared
+base scripts.

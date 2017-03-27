@@ -403,6 +403,12 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
+express-group-routes@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/express-group-routes/-/express-group-routes-1.1.0.tgz#de933080079c027fed70be0967cb55acd8bc9387"
+  dependencies:
+    express "^4.13.4"
+
 express-x-hub@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/express-x-hub/-/express-x-hub-1.0.4.tgz#93917da478f5c517f5b74a2700795f616a2a0d1d"
@@ -410,7 +416,7 @@ express-x-hub@^1.0.4:
     raw-body "^2.1.4"
     type-is "^1.6.9"
 
-express@^4.15.2:
+express@^4.13.4, express@^4.15.2:
   version "4.15.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.15.2.tgz#af107fc148504457f2dca9a6f2571d7129b97b35"
   dependencies:

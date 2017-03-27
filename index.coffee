@@ -2,6 +2,7 @@ require('dotenv').config()
 
 pkg = require './package.json'
 express = require 'express'
+require 'express-group-routes'
 
 githubWebhookEndpoints = require './github-endpoints'
 

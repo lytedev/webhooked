@@ -8,7 +8,7 @@ githubWebhookEndpoints = require './github-endpoints'
 
 PORT = process.env.PORT or 3010
 INFO_ROOT = process.env.INFO_ROOT or '/'
-REQUESTS_ROOT = process.env.PORT or '/'
+REQUESTS_ROOT = process.env.REQUESTS_ROOT or '/'
 
 app = express()
 

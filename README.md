@@ -1,6 +1,6 @@
-# tiny-ci
+# webhooked
 
-> A dead-simple, super tiny, webhook-based CI tool.
+> A simple express server designed to receive and verify webhook requests and execute scripts.
 
 Maybe.
 

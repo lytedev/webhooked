@@ -1,6 +1,6 @@
 {
   "name": "tiny-ci",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -14,9 +14,11 @@
   "author": "daniel@lytedev.io",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "coffee-script": "^1.12.4",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
+    "github-webhook-handler": "^0.6.0",
     "pm2": "^2.4.2"
   }
 }

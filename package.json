@@ -1,7 +1,7 @@
 {
   "name": "webhooked",
   "version": "1.0.0",
-  "description": "A simple server designed to receieve and vedrify webhook requests and execute scripts",
+  "description": "A simple express server designed to receieve and vedrify webhook requests and execute scripts.",
   "main": "dist/index.js",
   "scripts": {
     "start": "coffee index.coffee",

@@ -13,11 +13,13 @@ if [ -z "$LYTEDEV_HUGO_DIR" ]; then
 	exit 1
 fi
 
+echo "Moving to directory $LYTEDEV_HUGO_DIR"
 pushd "$LYTEDEV_HUGO_DIR"
-git pull
+git pull origin source
 yarn
 pushd "themes/lytedev"
-git pull
+echo "Moving to directory $PWD/themes/lytedev"
+git pull origin master
 yarn
 popd
 yarn run build-all

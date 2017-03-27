@@ -3,7 +3,7 @@ spawn = require('child_process').spawn
 procs = {}
 
 n = 0
-spawnProcess = (process, args, onSpawn, onExit) =>
+spawnProcess = (process, args, onExit, onSpawn) =>
 	if not args?
 		args = []
 
@@ -38,7 +38,7 @@ spawnProcess = (process, args, onSpawn, onExit) =>
 	proc.on 'exit', (code) =>
 		console.log strRep, "exited with code", code
 		if onExit?
-			onExit process, args, proc, stdout, stderr, code
+			onExit { process, args, proc, stdout, stderr, code }
 
 module.exports =
 	# processes: procs

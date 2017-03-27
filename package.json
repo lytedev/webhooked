@@ -1,7 +1,7 @@
 {
-  "name": "tiny-ci",
-  "version": "2.0.0",
-  "description": "",
+  "name": "webhooked",
+  "version": "1.0.0",
+  "description": "A simple server designed to receieve and vedrify webhook requests and execute scripts",
   "main": "dist/index.js",
   "scripts": {
     "start": "coffee index.coffee",
@@ -18,7 +18,7 @@
     "coffee-script": "^1.12.4",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
-    "github-webhook-handler": "^0.6.0",
+    "express-x-hub": "^1.0.4",
     "pm2": "^2.4.2"
   }
 }

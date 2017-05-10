@@ -41,4 +41,6 @@ Copy the example environment files and edit them:
 
 * Other webhook endpoints (GitLab, Slack?)
 * Verify Bitbucket POST requests?
+* Basic spam protection?
+	* Configurable rate limiting?
 

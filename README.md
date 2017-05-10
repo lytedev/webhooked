@@ -11,7 +11,7 @@ I don't really know what I'm talking about.
 Install dependencies:
 
 		npm install --global pm2 coffee-script
-		npm install
+		yarn
 
 Copy the example environment files and edit them:
 

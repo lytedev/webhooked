@@ -7,8 +7,9 @@
     "start": "coffee index.coffee",
     "clean": "rm -r ./dist",
     "build": "coffee --output dist --compile ./*.coffee && cp ./package.json dist && cp -r ./scripts dist && cp -r ./env_scripts dist",
-    "daemonize": "npm run build && pm2 start dist/index.js --name 'tiny-ci'",
-    "delete-daemon": "pm2 delete 'tiny-ci'",
+    "daemonize": "npm run build && pm2 start dist/index.js --name 'webhooked'",
+    "restart-daemon": "npm run build && pm2 restart 'webhooked'",
+    "delete-daemon": "pm2 delete 'webhooked'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "daniel@lytedev.io",

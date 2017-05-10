@@ -6,40 +6,39 @@ Maybe.
 
 I don't really know what I'm talking about.
 
-## To Do
-
-* Simple configuration system? (map endpoints or certain body variables to
-	scripts?)
-* Other webhook endpoints (GitLab, Bitbucket, Slack?)
-* Flesh out the build system (so that scripts and even the `package.json` don't
-	need to be copied - yuck!)
-* Better method of calling scripts?
-
 ## Setup
 
-* `npm install --global pm2 coffee-script` (you may need to run as root)
-* `npm run daemonize`
+Install dependencies:
 
-Also edit the `example.env` and save your copy as `.env`.
+		npm install --global pm2 coffee-script
+		npm install
+
+Copy the example environment files and edit them:
+
+		cp example.env .env
+		cp example.env.endpoints.coffee .env.endpoints.coffee
+		$EDITOR .env*
+
+## Running
+
+		npm run daemonize
 
 ## Stahp!
 
-* `npm run delete-daemon`
+		npm run delete-daemon
+
+## Reload
+
+		npm run restart-daemon
 
 ## How it Works
 
-Simply point a webhook at this server and have it trigger the script that
-properly pulls down the code or whatever.
+* Setup your script that does the thing you want triggered
+* Configure this app so that the right webhook endpoint triggers the right script
+* Point the appropriate webhooks at the configured endpoint
 
-Also check secrets and whatnot... someday.
+## To Do
 
-## FAQ
-
-#### What is the `env_scripts` directory for?
-
-`env_scripts` is meant to contain environment-specific scripts. For example,
-currently we have a bash script that exports directories used by the main
-scripts. Realistically, this would be... all scripts, but it's nice to have some
-examples in the `scripts` directory and in the future, there may be some shared
-base scripts.
+* Other webhook endpoints (GitLab, Slack?)
+* Verify Bitbucket POST requests?
 

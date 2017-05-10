@@ -1,5 +1,5 @@
-spawnProcess = require('./process-spawner.coffee').spawnProcess
-verifyGitHubSignatureRequest = require './verify-signature.coffee'
+spawnProcess = require('./process-spawner').spawnProcess
+verifyGitHubSignatureRequest = require './verify-signature'
 
 module.exports = (req, res, next) =>
 	if req.method != 'POST' then return next()

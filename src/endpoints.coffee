@@ -4,9 +4,9 @@ bodyParser = require 'body-parser'
 
 githubWebhookMiddleware = require './github-endpoints'
 bitbucketWebhookMiddleware = require './bitbucket-endpoints'
-simpleProcessSpawner = require('./process-spawner.coffee').simpleProcessSpawner
+simpleProcessSpawner = require('./process-spawner').simpleProcessSpawner
 
-ENV_ENDPOINTS_FILE = path.resolve __dirname, '..', '.env.endpoints.coffee'
+ENV_ENDPOINTS_FILE = path.resolve __dirname, '..', '.env.endpoints'
 
 module.exports = (app, requestsEndpoint) =>
 	app.locals.githubRepositoryNameHooks = []
@@ -32,10 +32,12 @@ module.exports = (app, requestsEndpoint) =>
 		else
 			return next()
 
-	if fs.existsSync ENV_ENDPOINTS_FILE
-		optionalEnvMiddleware = require(ENV_ENDPOINTS_FILE)(app, requestsEndpoint)
+	try
+		optionalEnvMiddleware = require(ENV_ENDPOINTS_FILE)(app, requestsEndpoint, __dirname)
 		if typeof(optionalEnvMiddleware) == 'function'
 			app.use requestsEndpoint, optionalEnvMiddleware
+	catch
+		null
 
 	app.all '*', (req, res, next) ->
 		return next()

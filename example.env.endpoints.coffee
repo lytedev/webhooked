@@ -1,8 +1,7 @@
 path = require 'path'
 
-simpleProcessSpawner = require('./src/process-spawner.coffee').simpleProcessSpawner
-
-module.exports = (app) ->
+module.exports = (app, requestsEndpoint, srcDir) ->
+	processSpawners = require(path.resolve(srcDir, 'process-spawner'))
 
 	# This will cause the 'example-lytedev-hugo-site.bash' script to be executed
 	# by 'bash' when any webhook request comes in where the repository.full_name
@@ -17,7 +16,6 @@ module.exports = (app) ->
 	# with HOOKID_PREFIX. This allows for easily specifyin "manual" webhooks. Be
 	# sure to use a long and random string here and keep it secret so that you
 	# don't get DDoS'd!
-
 	app.locals.urlIncludesHooks.push
 		string: process.env.SECRET_WEBHOOK_ID
 		exec: 'bash'
@@ -29,3 +27,4 @@ module.exports = (app) ->
 			return res.status(200).send('98 bottles of beer on the wall, now')
 		else
 			next()
+

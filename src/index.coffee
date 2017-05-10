@@ -18,6 +18,8 @@ URL_WEBHOOK_PREFIX = process.env.URL_WEBHOOK_PREFIX  = process.env.URL_WEBHOOK_P
 
 app = express()
 
+console.log "\n== lytedev/webhooked v" + process.env.__VERSION + " ==\n"
+
 app.get INFO_ROOT, (req, res, next) =>
 	res.send 'lytedev/webhooked v' + process.env.__VERSION
 	return next()

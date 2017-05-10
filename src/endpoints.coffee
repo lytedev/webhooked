@@ -6,8 +6,6 @@ githubWebhookMiddleware = require './github-endpoints'
 bitbucketWebhookMiddleware = require './bitbucket-endpoints'
 simpleProcessSpawner = require('./process-spawner').simpleProcessSpawner
 
-ENV_ENDPOINTS_FILE = path.resolve __dirname, '..', '.env.endpoints'
-
 module.exports = (app, requestsEndpoint) =>
 	app.locals.githubRepositoryNameHooks = []
 	app.locals.bitbucketRepositoryNameHooks = []
@@ -20,8 +18,9 @@ module.exports = (app, requestsEndpoint) =>
 	app.use path.join(requestsEndpoint, process.env.BITBUCKET_ROOT), bitbucketWebhookMiddleware
 
 	app.use requestsEndpoint, (req, res, next) ->
+		console.log 'Webhook Request:', req.url
 		n = 0
-		for hook in app.locals.urlIncludesHooks
+		for hook in req.app.locals.urlIncludesHooks
 			if req.url.includes(process.env.URL_WEBHOOK_PREFIX + hook.string)
 				n += 1
 				simpleProcessSpawner
@@ -33,10 +32,11 @@ module.exports = (app, requestsEndpoint) =>
 			return next()
 
 	try
-		optionalEnvMiddleware = require(ENV_ENDPOINTS_FILE)(app, requestsEndpoint, __dirname)
+		optionalEnvMiddleware = require('../.env.endpoints')(app, requestsEndpoint, __dirname)
 		if typeof(optionalEnvMiddleware) == 'function'
 			app.use requestsEndpoint, optionalEnvMiddleware
-	catch
+	catch err
+		console.log 'Warning: Failed to require the ".env.endpoints{.coffee,.js}" file.', err
 		null
 
 	app.all '*', (req, res, next) ->

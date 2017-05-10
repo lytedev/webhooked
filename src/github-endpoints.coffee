@@ -6,8 +6,6 @@ module.exports = (req, res, next) =>
 	isVerified = verifyGitHubSignatureRequest(req, process.env.GITHUB_SECRET)
 	req.isVerifiedGutHubRequest = isVerified
 
-	console.log 'github post endpoint', isVerified
-
 	if isVerified
 		n = 0
 		for repo in app.locals.githubRepositoryNameHooks

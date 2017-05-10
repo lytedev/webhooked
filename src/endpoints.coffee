@@ -23,9 +23,7 @@ module.exports = (app, requestsEndpoint) =>
 		for hook in req.app.locals.urlIncludesHooks
 			if req.url.includes(process.env.URL_WEBHOOK_PREFIX + hook.string)
 				n += 1
-				simpleProcessSpawner
-					exec: 'bash'
-					script: 'example-lytedev-hugo-site.bash'
+				simpleProcessSpawner hook
 		if n != 0
 			res.status(200).send('Success')
 		else

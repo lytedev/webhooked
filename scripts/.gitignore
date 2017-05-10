@@ -1,3 +1,4 @@
 *
 !.gitignore
+!readme.md
 !example-lytedev-hugo-site.bash

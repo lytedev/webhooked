@@ -42,3 +42,4 @@ currently we have a bash script that exports directories used by the main
 scripts. Realistically, this would be... all scripts, but it's nice to have some
 examples in the `scripts` directory and in the future, there may be some shared
 base scripts.
+

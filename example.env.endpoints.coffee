@@ -1,7 +1,6 @@
 path = require 'path'
 
 module.exports = (app, requestsEndpoint, srcDir) ->
-	processSpawners = require(path.resolve(srcDir, 'process-spawner'))
 
 	# This will cause the 'example-lytedev-hugo-site.bash' script to be executed
 	# by 'bash' when any webhook request comes in where the repository.full_name
@@ -13,9 +12,9 @@ module.exports = (app, requestsEndpoint, srcDir) ->
 
 	# This will cause the 'example-lytedev-hugo-site.bash' script to be executed
 	# by 'bash' when any incoming request contains the specified string prefixed
-	# with HOOKID_PREFIX. This allows for easily specifyin "manual" webhooks. Be
+	# with HOOKID_PREFIX. This allows for easily specifying "manual" webhooks. Be
 	# sure to use a long and random string here and keep it secret so that you
-	# don't get DDoS'd!
+	# don't get DoS'd!
 	app.locals.urlIncludesHooks.push
 		string: process.env.SECRET_WEBHOOK_ID
 		exec: 'bash'
@@ -23,8 +22,8 @@ module.exports = (app, requestsEndpoint, srcDir) ->
 
 	# The module that this file exports may return Express middleware to be used
 	return (req, res, next) ->
-		if req.method == 'POST' and req.url.includes('99-bottles-of-beer')
-			return res.status(200).send('98 bottles of beer on the wall, now')
+		if req.method == 'GET' and req.url.includes('99-bottles-of-beer')
+			return res.status(200).send('98 bottles of beer on the wall, now, friend!')
 		else
 			next()
 

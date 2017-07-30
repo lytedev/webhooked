@@ -4,9 +4,12 @@ bodyParser = require 'body-parser'
 
 githubWebhookMiddleware = require './github-endpoints'
 bitbucketWebhookMiddleware = require './bitbucket-endpoints'
-simpleProcessSpawner = require('./process-spawner').simpleProcessSpawner
+processSpawners = require('./process-spawner')
 
-module.exports = (app, requestsEndpoint) =>
+simpleProcessSpawner = processSpawners.simpleProcessSpawner
+dedupProcessSpawner = processSpawners.dedupProcessSpawner
+
+module.exports = (app, requestsEndpoint) ->
 	app.locals.githubRepositoryNameHooks = []
 	app.locals.bitbucketRepositoryNameHooks = []
 	app.locals.urlIncludesHooks = []
@@ -23,7 +26,10 @@ module.exports = (app, requestsEndpoint) =>
 		for hook in req.app.locals.urlIncludesHooks
 			if req.url.includes(process.env.URL_WEBHOOK_PREFIX + hook.string)
 				n += 1
-				simpleProcessSpawner hook
+				if hook.noDedup? and hook.noDedup
+					simpleProcessSpawner hook
+				else
+					dedupProcessSpawner hook
 		if n != 0
 			res.status(200).send('Success')
 		else
@@ -32,6 +38,7 @@ module.exports = (app, requestsEndpoint) =>
 	try
 		optionalEnvMiddleware = require('../.env.endpoints')(app, requestsEndpoint, __dirname)
 		if typeof(optionalEnvMiddleware) == 'function'
+			console.log 'Custom Middleware Installed'
 			app.use requestsEndpoint, optionalEnvMiddleware
 	catch err
 		console.log 'Warning: Failed to require the ".env.endpoints{.coffee,.js}" file.', err

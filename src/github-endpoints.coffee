@@ -6,6 +6,7 @@ module.exports = (req, res, next) =>
 	isVerified = verifyGitHubSignatureRequest(req, process.env.GITHUB_SECRET)
 	req.isVerifiedGutHubRequest = isVerified
 
+	# TODO: add dedup
 	if isVerified
 		n = 0
 		for repo in app.locals.githubRepositoryNameHooks

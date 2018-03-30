@@ -9,6 +9,9 @@ dedupQueue = {}
 
 n = 0
 spawnProcess = (process, args, options) ->
+	if not options?
+		options = {}
+
 	if not args?
 		args = []
 
@@ -81,8 +84,14 @@ dedupProcessSpawner = (options) ->
 				dedupProcessSpawner newOptions
 		dedupTrack[key] = simpleProcessSpawner options
 
+smartSpawn = (options) ->
+	if options.noDedup? and options.noDedup == true
+		return simpleProcessSpawner options
+	return dedupProcessSpawner options
+
 module.exports =
 	# TODO: processes: procs
 	spawnProcess: spawnProcess
+	smartSpawn: smartSpawn
 	dedupProcessSpawner: dedupProcessSpawner
 	simpleProcessSpawner: simpleProcessSpawner

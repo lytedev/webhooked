@@ -2,38 +2,31 @@ path = require 'path'
 fs = require 'fs'
 bodyParser = require 'body-parser'
 
-githubWebhookMiddleware = require './github-endpoints'
-bitbucketWebhookMiddleware = require './bitbucket-endpoints'
 processSpawners = require('./process-spawner')
 
-simpleProcessSpawner = processSpawners.simpleProcessSpawner
-dedupProcessSpawner = processSpawners.dedupProcessSpawner
+smartSpawn = processSpawners.smartSpawn
 
 module.exports = (app, requestsEndpoint) ->
-	app.locals.githubRepositoryNameHooks = []
-	app.locals.bitbucketRepositoryNameHooks = []
-	app.locals.urlIncludesHooks = []
+	app.locals.hooks = []
 
 	app.use bodyParser.json
 		type: 'application/json'
-	
-	app.use path.join(requestsEndpoint, process.env.GITHUB_ROOT), githubWebhookMiddleware
-	app.use path.join(requestsEndpoint, process.env.BITBUCKET_ROOT), bitbucketWebhookMiddleware
 
 	app.use requestsEndpoint, (req, res, next) ->
-		console.log 'Webhook Request:', req.url
+		console.log 'Request Received:', req.url
 		n = 0
-		for hook in req.app.locals.urlIncludesHooks
-			if req.url.includes(process.env.URL_WEBHOOK_PREFIX + hook.string)
-				n += 1
-				if hook.noDedup? and hook.noDedup
-					simpleProcessSpawner hook
-				else
-					dedupProcessSpawner hook
-		if n != 0
-			res.status(200).send('Success')
-		else
+		for hook in req.app.locals.hooks
+			try
+				if hook.checker req
+					smartSpawn hook
+					n += 1
+			catch er
+				null
+		if n == 0
+			# this may occur when we receive an invalid checkCallback()
 			return next()
+		else
+			return res.status(200).send('Running ' + n + ' jobs.')
 
 	try
 		optionalEnvMiddleware = require('../.env.endpoints')(app, requestsEndpoint, __dirname)

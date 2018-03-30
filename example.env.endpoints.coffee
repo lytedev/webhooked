@@ -2,23 +2,21 @@ path = require 'path'
 
 module.exports = (app, requestsEndpoint, srcDir) ->
 
-	# This will cause the 'example-lytedev-hugo-site.bash' script to be executed
-	# by 'bash' when any webhook request comes in where the repository.full_name
-	# matches the repositoryFullName here.
-	app.locals.githubRepositoryNameHooks.push
-		repositoryFullName: 'lytedev/lytedev.github.io'
-		exec: 'bash'
-		script: 'example-lytedev-hugo-site.bash'
+	# Environment variables should be configured with `.env`. See `example.env`
+	# for an example.
 
-	# This will cause the 'example-lytedev-hugo-site.bash' script to be executed
-	# by 'bash' when any incoming request contains the specified string prefixed
-	# with HOOKID_PREFIX. This allows for easily specifying "manual" webhooks. Be
-	# sure to use a long and random string here and keep it secret so that you
-	# don't get DoS'd!
-	app.locals.urlIncludesHooks.push
-		string: process.env.SECRET_WEBHOOK_ID
+	# This will cause the 'count-to-ten.bash' script to be executed by 'bash' when
+	# any incoming request URL contains the specified string (SECRET_WEBHOOK_ID).
+	# This allows for easily specifying "manual" webhooks. Be sure to use a long
+	# and random string here and keep it secret so that you don't get DDoS'd!
+	app.locals.hooks.urlIncludes.push
+		# if checker(req) evaluates to true, the script will be called
+		checker: (req) -> req.url.includes(process.env.SECRET_WEBHOOK_ID)
 		exec: 'bash'
-		script: 'example-lytedev-hugo-site.bash'
+		script: 'count-to-ten.bash'
+		noDedup: true
+		# noDedpu: true lets more than one instance of the job be active at any time
+		# you shouldn't probably ever really need this
 
 	# The module that this file exports may return Express middleware to be used
 	return (req, res, next) ->

@@ -6,6 +6,8 @@ Maybe.
 
 I don't really know what I'm talking about.
 
+Does this project even work?
+
 ## Setup
 
 Install dependencies:
@@ -34,7 +36,7 @@ Copy the example environment files and edit them:
 ## How it Works
 
 * Setup your script that does the thing you want triggered
-* Configure this app so that the right webhook endpoint triggers the right script
+* Configure this app so that the right `webhooked` endpoint with the right information triggers the right script
 * Point the appropriate webhooks at the configured endpoint
 
 ## To Do
@@ -42,5 +44,4 @@ Copy the example environment files and edit them:
 * Other webhook endpoints (GitLab, Slack?)
 * Verify Bitbucket POST requests?
 * Basic spam protection?
-	* Configurable rate limiting?
 

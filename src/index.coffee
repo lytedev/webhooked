@@ -12,10 +12,7 @@ PORT					     = process.env.PORT                = process.env.PORT					      or 
 BASE_URL           = process.env.BASE_URL            = process.env.BASE_URL           or ''
 INFO_ROOT          = process.env.INFO_ROOT           = process.env.INFO_ROOT          or BASE_URL + '/'
 REQUESTS_ROOT      = process.env.REQUESTS_ROOT       = process.env.REQUESTS_ROOT      or BASE_URL + '/webhooks'
-GITHUB_ROOT        = process.env.GITHUB_ROOT         = process.env.GITHUB_ROOT        or BASE_URL + '/github'
-BITBUCKET_ROOT     = process.env.BITBUCKET_ROOT      = process.env.BITBUCKET_ROOT     or BASE_URL + '/bitbucket'
 GITHUB_SECRET      = process.env.GITHUB_SECRET       = process.env.GITHUB_SECRET      or BASE_URL + 'github_secret'
-URL_WEBHOOK_PREFIX = process.env.URL_WEBHOOK_PREFIX  = process.env.URL_WEBHOOK_PREFIX or BASE_URL + 'by-secret/'
 
 app = express()
 
@@ -34,6 +31,4 @@ app.listen(PORT).on 'error', (err) ->
 console.log 'Listening on port', PORT
 console.log 'Info endpoint:', INFO_ROOT
 console.log 'Requests endpoint:', REQUESTS_ROOT
-console.log 'GitHub endpoint:', REQUESTS_ROOT + GITHUB_ROOT
-console.log 'Bitbucket endpoint:', REQUESTS_ROOT + BITBUCKET_ROOT
 

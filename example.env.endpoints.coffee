@@ -9,7 +9,7 @@ module.exports = (app, requestsEndpoint, srcDir) ->
 	# any incoming request URL contains the specified string (SECRET_WEBHOOK_ID).
 	# This allows for easily specifying "manual" webhooks. Be sure to use a long
 	# and random string here and keep it secret so that you don't get DDoS'd!
-	app.locals.hooks.urlIncludes.push
+	app.locals.hooks.push
 		# if checker(req) evaluates to true, the script will be called
 		checker: (req) -> req.url.includes(process.env.SECRET_WEBHOOK_ID)
 		exec: 'bash'

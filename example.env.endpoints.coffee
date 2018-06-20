@@ -15,7 +15,7 @@ module.exports = (app, requestsEndpoint, srcDir) ->
 		exec: 'bash'
 		script: 'count-to-ten.bash'
 		noDedup: true
-		# noDedpu: true lets more than one instance of the job be active at any time
+		# noDedup: true lets more than one instance of the job be active at any time
 		# you shouldn't probably ever really need this
 
 	# The module that this file exports may return Express middleware to be used

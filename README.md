@@ -12,26 +12,26 @@ Does this project even work?
 
 Install dependencies:
 
-		npm install --global pm2 coffee-script
-		yarn
+	npm install --global pm2 coffee-script
+	yarn
 
 Copy the example environment files and edit them:
 
-		cp example.env .env
-		cp example.env.endpoints.coffee .env.endpoints.coffee
-		$EDITOR .env*
+	cp example.env .env
+	cp example.env.endpoints.coffee .env.endpoints.coffee
+	$EDITOR .env*
 
 ## Running
 
-		npm run daemonize
+	npm run daemonize
 
 ## Stahp!
 
-		npm run delete-daemon
+	npm run delete-daemon
 
 ## Reload
 
-		npm run restart-daemon
+	npm run restart-daemon
 
 ## How it Works
 
